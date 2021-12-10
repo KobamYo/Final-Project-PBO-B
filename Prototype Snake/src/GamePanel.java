@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.Thread.State;
 
 import javax.swing.*;
 import java.util.Random;
@@ -31,14 +32,21 @@ public class GamePanel extends JPanel implements ActionListener
 	private String highScore = "";
 	Timer timer;
 	Random random;
+	private Menu menu;
 	
-	GamePanel()
-	{
+	public static enum STATE{
+		MENU,
+		GAME
+	};
+	public static STATE State = STATE.MENU;
+	
+	GamePanel(){
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
+		this.addMouseListener(new MouseInput());
 		startGame();
 	}
 	
@@ -48,6 +56,8 @@ public class GamePanel extends JPanel implements ActionListener
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
+		menu = new Menu();
+		
 	}
 	
 	public void paintComponent(Graphics g)
@@ -58,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener
 	
 	public void draw(Graphics g)
 	{
+		if(State == STATE.GAME) {
 		if(running)
 		{
 			//making grid line
@@ -111,6 +122,10 @@ public class GamePanel extends JPanel implements ActionListener
 		else
 		{
 			gameOver(g);
+		}
+		}
+		else if (State == STATE.MENU) {
+			menu.render(g);
 		}
 	}
 	
@@ -270,8 +285,7 @@ public class GamePanel extends JPanel implements ActionListener
 		@Override
 		public void keyPressed(KeyEvent e)
 		{
-			switch(e.getKeyCode())
-			{
+			switch(e.getKeyCode()){
 			case KeyEvent.VK_LEFT:
 				if(direction != 'R')
 					direction = 'L';
@@ -289,6 +303,7 @@ public class GamePanel extends JPanel implements ActionListener
 					direction = 'D';
 				break;
 			}
+		
 		}
 	}
 
