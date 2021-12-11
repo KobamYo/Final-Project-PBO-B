@@ -31,6 +31,14 @@ public class GamePanel extends JPanel implements ActionListener
 	private String highScore = "";
 	Timer timer;
 	Random random;
+	private Menu menu;
+	
+	public static enum STATE{
+		MENU,
+		GAME
+	};
+	
+	public static STATE State = STATE.MENU;
 	
 	GamePanel()
 	{
@@ -39,6 +47,7 @@ public class GamePanel extends JPanel implements ActionListener
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
+		this.addMouseListener(new MouseInput());
 		startGame();
 	}
 	
@@ -59,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener
 	
 	public void draw(Graphics g)
 	{
+		if(State == STATE.GAME) {
 		if(running)
 		{
 			//making grid line
@@ -89,7 +99,7 @@ public class GamePanel extends JPanel implements ActionListener
 				{
 					g.setColor(new Color(45, 180, 0));
 					/*g.setColor(new Color(random.nextInt(255), random.nextInt(255), 
-							random.nextInt(255))); //snake rgb */ 
+						random.nextInt(255))); //snake rgb */ 
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
@@ -112,6 +122,10 @@ public class GamePanel extends JPanel implements ActionListener
 		else
 		{
 			gameOver(g);
+		}
+		}
+		else if (State == STATE.MENU) {
+			menu.render(g);
 		}
 	}
 	
