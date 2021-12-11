@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.Thread.State;
 
 import javax.swing.*;
 import java.util.Random;
@@ -16,9 +15,9 @@ public class GamePanel extends JPanel implements ActionListener
 
 	static final int SCREEN_WIDTH = 600;
 	static final int SCREEN_HEIGHT = 600;
-	static final int UNIT_SIZE = 25;
+	static final int UNIT_SIZE = 25; //the more the bigger object in game
 	static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-	static final int DELAY = 95;
+	static final int DELAY = 75; //the more the longer for snake movement
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
@@ -32,32 +31,24 @@ public class GamePanel extends JPanel implements ActionListener
 	private String highScore = "";
 	Timer timer;
 	Random random;
-	private Menu menu;
 	
-	public static enum STATE{
-		MENU,
-		GAME
-	};
-	public static STATE State = STATE.MENU;
-	
-	GamePanel(){
+	GamePanel()
+	{
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
-		this.addMouseListener(new MouseInput());
 		startGame();
 	}
 	
 	public void startGame()
 	{
 		newApple();
+		newRottenApple();
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
-		menu = new Menu();
-		
 	}
 	
 	public void paintComponent(Graphics g)
@@ -68,7 +59,6 @@ public class GamePanel extends JPanel implements ActionListener
 	
 	public void draw(Graphics g)
 	{
-		if(State == STATE.GAME) {
 		if(running)
 		{
 			//making grid line
@@ -122,10 +112,6 @@ public class GamePanel extends JPanel implements ActionListener
 		else
 		{
 			gameOver(g);
-		}
-		}
-		else if (State == STATE.MENU) {
-			menu.render(g);
 		}
 	}
 	
@@ -183,7 +169,12 @@ public class GamePanel extends JPanel implements ActionListener
 		if((x[0] == rottenAppleX) && (y[0] == rottenAppleY))
 		{
 			running = false;
-			newRottenApple();
+			//bodyParts -= 3; //if rotten apple eaten, snake will become shorter by 5
+			//applesEaten -=3; //if you want to reduce the score when eating rotten apple
+			/*if(bodyParts == 0) //when snake reaches 0 body parts, the game is over
+			{
+				running = false;
+			}*/	
 		}
 	}
 	
@@ -285,7 +276,8 @@ public class GamePanel extends JPanel implements ActionListener
 		@Override
 		public void keyPressed(KeyEvent e)
 		{
-			switch(e.getKeyCode()){
+			switch(e.getKeyCode())
+			{
 			case KeyEvent.VK_LEFT:
 				if(direction != 'R')
 					direction = 'L';
@@ -303,7 +295,6 @@ public class GamePanel extends JPanel implements ActionListener
 					direction = 'D';
 				break;
 			}
-		
 		}
 	}
 
