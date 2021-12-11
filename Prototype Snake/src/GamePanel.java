@@ -210,6 +210,10 @@ public class GamePanel extends JPanel implements ActionListener
 			timer.stop();
 	}
 	
+	public void bestScore() {
+		if(highScore < applesEaten) highScore = applesEaten;
+	}
+	
 	public void gameOver(Graphics g)
 	{
 		//game over text
