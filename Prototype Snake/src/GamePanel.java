@@ -217,7 +217,7 @@ public class GamePanel extends JPanel implements ActionListener
 		g.setFont(new Font("Arial", Font.BOLD, 75));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
 		g.drawString("Game Over", (SCREEN_WIDTH - metrics1.stringWidth("Game Over")) / 2, 
-				SCREEN_HEIGHT / 2);
+				SCREEN_HEIGHT / 3);
 		
 		//scores text after game over
 		g.setColor(Color.white);
@@ -225,7 +225,15 @@ public class GamePanel extends JPanel implements ActionListener
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
 		g.drawString("High Scores: " + applesEaten, 
 				(SCREEN_WIDTH - metrics2.stringWidth("Total Scores: " + applesEaten)) / 2, 
-				g.getFont().getSize());
+				SCREEN_HEIGHT / 2);
+				
+		//highest score
+		g.setColor(Color.white);
+		g.setFont(new Font("Arial", Font.BOLD, 40));
+		FontMetrics metrics3 = getFontMetrics(g.getFont());
+		g.drawString("Highest Score: " + highScore, 
+				(SCREEN_WIDTH - metrics3.stringWidth("Highest Score " + highScore)) / 2, 
+				(SCREEN_HEIGHT / 2)+50);
 	}
 	
 	/*Bingung bikin highscore
