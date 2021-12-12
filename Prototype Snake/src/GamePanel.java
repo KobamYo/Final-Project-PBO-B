@@ -1,23 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import javax.swing.*;
 import java.util.Random;
-
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements ActionListener
-{
-
+public class GamePanel extends JPanel implements ActionListener {
 	static final int SCREEN_WIDTH = 600;
 	static final int SCREEN_HEIGHT = 600;
-	static final int UNIT_SIZE = 25; //the more the bigger object in game
+	static final int UNIT_SIZE = 25;
 	static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-	static final int DELAY = 75; //the more the longer for snake movement
+	static final int DELAY = 95;
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
@@ -28,36 +20,37 @@ public class GamePanel extends JPanel implements ActionListener
 	int rottenAppleY;
 	char direction = 'R';
 	boolean running = false;
-	private String highScore = "";
+	private int highScore = 0;
 	Timer timer;
 	Random random;
 	private Menu menu;
 	
 	public static enum STATE{
 		MENU,
+		ABOUT,
 		GAME
 	};
-	
 	public static STATE State = STATE.MENU;
 	
-	GamePanel()
-	{
+	GamePanel(){
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
 		this.addMouseListener(new MouseInput());
+		
 		startGame();
 	}
 	
-	public void startGame()
+	public synchronized void startGame()
 	{
 		newApple();
-		newRottenApple();
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
+		menu = new Menu();
+		
 	}
 	
 	public void paintComponent(Graphics g)
@@ -99,7 +92,7 @@ public class GamePanel extends JPanel implements ActionListener
 				{
 					g.setColor(new Color(45, 180, 0));
 					/*g.setColor(new Color(random.nextInt(255), random.nextInt(255), 
-						random.nextInt(255))); //snake rgb */ 
+							random.nextInt(255))); //snake rgb */ 
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
@@ -126,6 +119,22 @@ public class GamePanel extends JPanel implements ActionListener
 		}
 		else if (State == STATE.MENU) {
 			menu.render(g);
+		}
+		else if(State == STATE.ABOUT) {
+			g.setColor(Color.white);
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			g.drawString("ABOUT", 250, 100);
+			
+			g.setColor(Color.white);
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.drawString("Snake Game is a game", 200, 200);
+			g.drawString("built for an Object-Oriented Programming Final Project", 40, 225);
+			g.drawString("by", 290, 250);
+			g.drawString("Adifa Widyadhani Chanda D - 5025201013", 100, 275);
+			g.drawString("Fachrendy Zulfikar Abdillah - 5025201018", 103, 300);
+			g.drawString("Rycahaya Sri Hutomo - 5025201046", 130, 325);
+			g.drawString("Wahyu Tri Saputro - 5025201217", 145, 350);
+			
 		}
 	}
 	
@@ -175,6 +184,7 @@ public class GamePanel extends JPanel implements ActionListener
 			bodyParts++;
 			applesEaten++;
 			newApple();
+			newRottenApple();
 		}
 	}
 	
@@ -183,12 +193,7 @@ public class GamePanel extends JPanel implements ActionListener
 		if((x[0] == rottenAppleX) && (y[0] == rottenAppleY))
 		{
 			running = false;
-			//bodyParts -= 3; //if rotten apple eaten, snake will become shorter by 5
-			//applesEaten -=3; //if you want to reduce the score when eating rotten apple
-			/*if(bodyParts == 0) //when snake reaches 0 body parts, the game is over
-			{
-				running = false;
-			}*/	
+			newRottenApple();
 		}
 	}
 	
@@ -224,15 +229,13 @@ public class GamePanel extends JPanel implements ActionListener
 			timer.stop();
 	}
 	
-	public void bestScore() {
-		if(highScore < applesEaten) highScore = applesEaten;
-	}
-	
 	public void gameOver(Graphics g)
 	{
+		if(applesEaten > highScore) highScore = applesEaten;
+		
 		//game over text
 		g.setColor(Color.red);
-		g.setFont(new Font("Arial", Font.BOLD, 75));
+		g.setFont(new Font("Arial", Font.BOLD, 55));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
 		g.drawString("Game Over", (SCREEN_WIDTH - metrics1.stringWidth("Game Over")) / 2, 
 				SCREEN_HEIGHT / 3);
@@ -241,10 +244,10 @@ public class GamePanel extends JPanel implements ActionListener
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.BOLD, 40));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
-		g.drawString("High Scores: " + applesEaten, 
-				(SCREEN_WIDTH - metrics2.stringWidth("Total Scores: " + applesEaten)) / 2, 
+		g.drawString("Your Score: " + applesEaten, 
+				(SCREEN_WIDTH - metrics2.stringWidth("Your Score " + applesEaten)) / 2, 
 				SCREEN_HEIGHT / 2);
-				
+		
 		//highest score
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.BOLD, 40));
@@ -302,8 +305,7 @@ public class GamePanel extends JPanel implements ActionListener
 		@Override
 		public void keyPressed(KeyEvent e)
 		{
-			switch(e.getKeyCode())
-			{
+			switch(e.getKeyCode()){
 			case KeyEvent.VK_LEFT:
 				if(direction != 'R')
 					direction = 'L';
@@ -321,7 +323,7 @@ public class GamePanel extends JPanel implements ActionListener
 					direction = 'D';
 				break;
 			}
+		
 		}
 	}
-
 }
