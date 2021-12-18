@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	Timer timer;
 	Random random;
 	private Menu menu;
+	private About about;
 	
 	public static enum STATE{
 		MENU,
@@ -50,7 +51,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		timer = new Timer(DELAY, this);
 		timer.start();
 		menu = new Menu();
-		
+		about = new About();
 	}
 	
 	public void paintComponent(Graphics g)
@@ -121,7 +122,8 @@ public class GamePanel extends JPanel implements ActionListener {
 			menu.render(g);
 		}
 		else if(State == STATE.ABOUT) {
-			g.setColor(Color.white);
+			about.render(g);
+			/**g.setColor(Color.white);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.drawString("ABOUT", 250, 100);
 			
@@ -134,6 +136,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			g.drawString("Fachrendy Zulfikar Abdillah - 5025201018", 103, 300);
 			g.drawString("Rycahaya Sri Hutomo - 5025201046", 130, 325);
 			g.drawString("Wahyu Tri Saputro - 5025201217", 145, 350);
+			*/
 			
 		}
 	}
