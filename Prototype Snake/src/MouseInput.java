@@ -4,6 +4,7 @@ import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener{
 	
+	//Memanggil classmenu
 	private Menu menu;
 
 	@Override
@@ -21,6 +22,8 @@ public class MouseInput implements MouseListener{
 		int my = e.getY();
 		
 		/**
+		letak rectangle
+		
 		 	public Rectangle playButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 150, 100, 50);
 			public Rectangle aboutButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 250, 100, 50);
 			public Rectangle quitButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 350, 100, 50);
@@ -46,28 +49,35 @@ public class MouseInput implements MouseListener{
 			}
 		}
 		
+		//jika diklik diarea tersebut akan menuju ke keluar
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 350) {
 			if (my >= 350 && my<= 400) {
 				System.exit(1);
 			}
 		}
 		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.MENU
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 430) {
 			if (my >= 430 && my<= 470) {
 				GamePanel.State = GamePanel.STATE.MENU;
 			}
 		}
 		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.EASY
 		if(mx >= GamePanel.WIDTH / 2 + 100 && mx <= GamePanel.WIDTH / 2 + 250) {
 			if (my >= 300 && my<= 330) {
 				GamePanel.State = GamePanel.STATE.EASY;
 			}
 		}
+		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.MEDIUM
 		if(mx >= GamePanel.WIDTH / 2 + 240 && mx <= GamePanel.WIDTH / 2 + 340) {
 			if (my >= 300 && my<= 330) {
 				GamePanel.State = GamePanel.STATE.MEDIUM;
 			}
 		}
+		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.GAME
 		if(mx >= GamePanel.WIDTH / 2 + 400 && mx <= GamePanel.WIDTH / 2 + 500) {
 			if (my >= 300 && my<= 330) {
 				GamePanel.State = GamePanel.STATE.HARD;
