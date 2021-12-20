@@ -28,6 +28,7 @@ public class Menu {
 		g.setFont(fnt1);
 		g.drawString("Play", playButton.x + 23, playButton.y + 35);
 		g2d.draw(playButton);
+		// About Button
 		g.drawString("About", playButton.x + 15, playButton.y + 135);
 		g2d.draw(aboutButton);
 		g.drawString("Quit", playButton.x + 23, playButton.y + 235);
