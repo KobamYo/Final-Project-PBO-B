@@ -270,25 +270,13 @@ public class GamePanel extends JPanel implements ActionListener {
 				(SCREEN_WIDTH - metrics3.stringWidth("Highest Score " + highScore)) / 2, 
 				(SCREEN_HEIGHT / 2)+50);
 		
-//		repaint();
 		Font fnt1 = new Font("arial", Font.BOLD, 25);
 		g.setFont(fnt1);
 		g.drawString("Back", backButton.x + 23, backButton.y + 30);
 		g2d.draw(backButton);
 	}
 	
-		FileReader readFile = null;
-		BufferedReader reader = null;
 		
-		try
-		{
-			readFile = new FileReader("highscore.dat");
-			reader = new BufferedReader(readFile);
-			return reader.readLine();
-		}
-		catch(Exception e)
-		{
-			return "0";
 		}
 		finally
 		{
