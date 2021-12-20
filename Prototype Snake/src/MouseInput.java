@@ -15,6 +15,8 @@ public class MouseInput implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		//mendeklarasikan untuk letak x dan y
 		int mx = e.getX();
 		int my = e.getY();
 		
@@ -30,6 +32,7 @@ public class MouseInput implements MouseListener{
 			public Rectangle hardButton = new Rectangle (GamePanel.WIDTH/ 2 + 400, 300, 100, 50);
 		 */
 		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.GAME
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 350) {
 			if (my >= 150 && my<= 200) {
 				GamePanel.State = GamePanel.STATE.GAME;
