@@ -31,6 +31,7 @@ public class About {
 		g.drawString("Rycahaya Sri Hutomo - 5025201046", 130, 325);
 		g.drawString("Wahyu Tri Saputro - 5025201217", 145, 350);
 		
+		// Back Button
 		Font fnt1 = new Font("arial", Font.BOLD, 25);
 		g.setFont(fnt1);
 		g.drawString("Back", backButton.x + 23, backButton.y + 30);
