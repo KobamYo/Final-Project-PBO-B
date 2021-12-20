@@ -39,6 +39,7 @@ public class MouseInput implements MouseListener{
 			}
 		}
 		
+		//jika diklik diarea tersebut akan menuju ke GamePanel.STATE.ABOUT
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 350) {
 			if (my >= 250 && my<= 300) {
 				GamePanel.State = GamePanel.STATE.ABOUT;
