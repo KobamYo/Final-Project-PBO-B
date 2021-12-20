@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Level {
+	//membuat kotak
 	public Rectangle easyButton = new Rectangle (GamePanel.WIDTH/ 2 + 100, 300, 100, 50);
 	public Rectangle mediumButton = new Rectangle (GamePanel.WIDTH/ 2 + 240, 300, 120, 50);
 	public Rectangle hardButton = new Rectangle (GamePanel.WIDTH/ 2 + 400, 300, 100, 50);
