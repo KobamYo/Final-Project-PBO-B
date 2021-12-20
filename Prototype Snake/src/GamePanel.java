@@ -276,22 +276,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2d.draw(backButton);
 	}
 	
-		
-		}
-		finally
-		{
-			try
-			{
-				if(reader != null)
-					reader.close();
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}*/
-	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
