@@ -54,7 +54,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	{	
 		newApple();
 		newRottenApple();
-		//timer = new Timer(DELAY, this);
 		menu = new Menu();
 		about = new About();
 		level = new Level();
@@ -74,14 +73,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		if(running)
 		{
-			//making grid line
-			/*
-			for(int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++)
-			{
-				g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-				g.drawLine(0, i * UNIT_SIZE, SCREEN_HEIGHT, i * UNIT_SIZE);
-			}*/
-			
 			//making apple
 			g.setColor(Color.red);
 			g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
@@ -101,18 +92,9 @@ public class GamePanel extends JPanel implements ActionListener {
 				else
 				{
 					g.setColor(new Color(45, 180, 0));
-					/*g.setColor(new Color(random.nextInt(255), random.nextInt(255), 
-							random.nextInt(255))); //snake rgb */ 
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
-			
-			/* buat ngecek highscore
-			if(applesEaten == 0)
-			{
-				//intialize the highscore
-				applesEaten = this.getHighscore();
-			}*/
 			
 			//draw scores
 			g.setColor(Color.white);
@@ -295,9 +277,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2d.draw(backButton);
 	}
 	
-	/*Bingung bikin highscore
-	public String getHighscore() //throws FileNotFoundException
-	{
 		FileReader readFile = null;
 		BufferedReader reader = null;
 		
