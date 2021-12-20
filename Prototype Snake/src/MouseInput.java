@@ -24,6 +24,10 @@ public class MouseInput implements MouseListener{
 			public Rectangle quitButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 350, 100, 50);
 			
 			public Rectangle backButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 430, 100, 45);
+			
+			public Rectangle easyButton = new Rectangle (GamePanel.WIDTH/ 2 + 100, 300, 100, 50);
+			public Rectangle mediumButton = new Rectangle (GamePanel.WIDTH/ 2 + 240, 300, 120, 50);
+			public Rectangle hardButton = new Rectangle (GamePanel.WIDTH/ 2 + 400, 300, 100, 50);
 		 */
 		
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 350) {
@@ -47,6 +51,22 @@ public class MouseInput implements MouseListener{
 		if(mx >= GamePanel.WIDTH / 2 + 250 && mx <= GamePanel.WIDTH / 2 + 430) {
 			if (my >= 430 && my<= 470) {
 				GamePanel.State = GamePanel.STATE.MENU;
+			}
+		}
+		
+		if(mx >= GamePanel.WIDTH / 2 + 100 && mx <= GamePanel.WIDTH / 2 + 250) {
+			if (my >= 300 && my<= 330) {
+				GamePanel.State = GamePanel.STATE.EASY;
+			}
+		}
+		if(mx >= GamePanel.WIDTH / 2 + 240 && mx <= GamePanel.WIDTH / 2 + 340) {
+			if (my >= 300 && my<= 330) {
+				GamePanel.State = GamePanel.STATE.MEDIUM;
+			}
+		}
+		if(mx >= GamePanel.WIDTH / 2 + 400 && mx <= GamePanel.WIDTH / 2 + 500) {
+			if (my >= 300 && my<= 330) {
+				GamePanel.State = GamePanel.STATE.HARD;
 			}
 		}
 	}
