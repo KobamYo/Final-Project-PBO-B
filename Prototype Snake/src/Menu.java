@@ -31,6 +31,7 @@ public class Menu {
 		// About Button
 		g.drawString("About", playButton.x + 15, playButton.y + 135);
 		g2d.draw(aboutButton);
+		// Quit Button
 		g.drawString("Quit", playButton.x + 23, playButton.y + 235);
 		g2d.draw(quitButton);
 	} 
