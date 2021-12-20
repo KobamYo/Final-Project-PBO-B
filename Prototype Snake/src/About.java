@@ -19,6 +19,7 @@ public class About {
 		
 		/* Content of About:
 		   - The purpose in making game
+		   - Member of team
 		*/
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
