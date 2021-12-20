@@ -7,11 +7,11 @@ import java.awt.Graphics2D;
 
 public class Menu {
 	
-	// Size of playButton
+	// Size of Play Button
 	public Rectangle playButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 150, 100, 50);
-	// Size of aboutButton
+	// Size of About Button
 	public Rectangle aboutButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 250, 100, 50);
-	// Size of quitButton
+	// Size of Quit Button
 	public Rectangle quitButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 350, 100, 50);
 	
 	public void render(Graphics g) {
@@ -23,6 +23,7 @@ public class Menu {
 		g.setColor(Color.white);
 		g.drawString("SNAKE GAME", GamePanel.WIDTH / 2 + 120, 100);
 		
+		// Play Button
 		Font fnt1 = new Font("arial", Font.BOLD, 25);
 		g.setFont(fnt1);
 		g.drawString("Play", playButton.x + 23, playButton.y + 35);
