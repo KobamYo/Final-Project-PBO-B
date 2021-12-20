@@ -259,6 +259,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.drawString("Highest Score: " + highScore, 
 				(SCREEN_WIDTH - metrics3.stringWidth("Highest Score " + highScore)) / 2, 
 				(SCREEN_HEIGHT / 2)+50);
+		
+		repaint();
+		Font fnt1 = new Font("arial", Font.BOLD, 25);
+		g.setFont(fnt1);
+		g.drawString("Back", backButton.x + 23, backButton.y + 30);
+		g2d.draw(backButton);
 	}
 	
 	/*Bingung bikin highscore
