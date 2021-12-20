@@ -13,18 +13,19 @@ public class GamePanel extends JPanel implements ActionListener {
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
-	int applesEaten;
+	public int applesEaten;
 	int appleX;
 	int appleY;
 	int rottenAppleX;
 	int rottenAppleY;
 	char direction = 'R';
 	boolean running = false;
-	private int highScore = 0;
+	public int highScore = 0;
 	Timer timer;
 	Random random;
 	private Menu menu;
 	private About about;
+//	private HighScore highscore;
 	
 	public static enum STATE{
 		MENU,
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		GAME
 	};
 	public static STATE State = STATE.MENU;
+	private Rectangle backButton;
 	
 	GamePanel(){
 		random = new Random();
@@ -47,7 +49,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	public synchronized void startGame()
 	{
 		newApple();
-		newRottenApple();
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
@@ -57,8 +58,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void paintComponent(Graphics g)
 	{
-		super.paintComponent(g);
-		draw(g);
+			super.paintComponent(g);
+			draw(g);
 	}
 	
 	public void draw(Graphics g)
@@ -236,6 +237,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void gameOver(Graphics g)
 	{
 		if(applesEaten > highScore) highScore = applesEaten;
+		backButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 430, 100, 45);
+		Graphics2D g2d = (Graphics2D) g;
 		
 		//game over text
 		g.setColor(Color.red);
