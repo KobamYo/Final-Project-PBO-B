@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
-import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener {
 	static final int SCREEN_WIDTH = 600;
@@ -13,27 +12,31 @@ public class GamePanel extends JPanel implements ActionListener {
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
-	public int applesEaten;
+	int applesEaten;
 	int appleX;
 	int appleY;
 	int rottenAppleX;
 	int rottenAppleY;
 	char direction = 'R';
 	boolean running = false;
-	public int highScore = 0;
+	private int highScore = 0;
 	Timer timer;
 	Random random;
 	private Menu menu;
 	private About about;
-//	private HighScore highscore;
+	int time;
+    private int dificulty;
+    private Level level;
 	
 	public static enum STATE{
 		MENU,
 		ABOUT,
-		GAME
+		GAME,
+		EASY,
+		MEDIUM,
+		HARD
 	};
 	public static STATE State = STATE.MENU;
-	private Rectangle backButton;
 	
 	GamePanel(){
 		random = new Random();
@@ -46,25 +49,28 @@ public class GamePanel extends JPanel implements ActionListener {
 		startGame();
 	}
 	
-	public synchronized void startGame()
+	public void startGame()
 	{
 		newApple();
 		running = true;
-		timer = new Timer(DELAY, this);
-		timer.start();
+		//timer = new Timer(DELAY, this);
 		menu = new Menu();
 		about = new About();
+		level = new Level();
+		this.time = 270;
+        this.timer = new Timer(this.time, this);
+        this.timer.start();
 	}
 	
 	public void paintComponent(Graphics g)
 	{
-			super.paintComponent(g);
+		super.paintComponent(g);
 			draw(g);
+		
 	}
 	
-	public void draw(Graphics g)
-	{
-		if(State == STATE.GAME) {
+	public void game(Graphics g) {
+		
 		if(running)
 		{
 			//making grid line
@@ -114,32 +120,43 @@ public class GamePanel extends JPanel implements ActionListener {
 			g.drawString("Scores: " + applesEaten, 
 					(SCREEN_WIDTH - metrics.stringWidth("Scores: " + applesEaten)) / 2, 
 					g.getFont().getSize());
-		}
-		else
-		{
+	}
+		else{
 			gameOver(g);
 		}
+	}	
+	
+	public void draw(Graphics g)
+	{
+		if(State == STATE.GAME) {
+			level.render(g);
+		}
+		if(State == STATE.EASY) {
+			this.timer.stop();
+			this.time = 270;
+	        this.timer = new Timer(this.time, this);
+	        this.timer.start();
+			game(g);
+		}
+		if(State == STATE.MEDIUM) {
+			this.timer.stop();
+			this.time = 270 / 2;
+	        this.timer = new Timer(this.time, this);
+	        this.timer.start();
+			game(g);
+		}
+		if(State == STATE.HARD) {
+			this.timer.stop();
+			this.time = 270 / 3;
+	        this.timer = new Timer(this.time, this);
+	        this.timer.start();
+			game(g);
 		}
 		else if (State == STATE.MENU) {
 			menu.render(g);
 		}
 		else if(State == STATE.ABOUT) {
 			about.render(g);
-			/**g.setColor(Color.white);
-			g.setFont(new Font("Arial", Font.BOLD, 30));
-			g.drawString("ABOUT", 250, 100);
-			
-			g.setColor(Color.white);
-			g.setFont(new Font("Arial", Font.BOLD, 20));
-			g.drawString("Snake Game is a game", 200, 200);
-			g.drawString("built for an Object-Oriented Programming Final Project", 40, 225);
-			g.drawString("by", 290, 250);
-			g.drawString("Adifa Widyadhani Chanda D - 5025201013", 100, 275);
-			g.drawString("Fachrendy Zulfikar Abdillah - 5025201018", 103, 300);
-			g.drawString("Rycahaya Sri Hutomo - 5025201046", 130, 325);
-			g.drawString("Wahyu Tri Saputro - 5025201217", 145, 350);
-			*/
-			
 		}
 	}
 	
@@ -237,8 +254,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void gameOver(Graphics g)
 	{
 		if(applesEaten > highScore) highScore = applesEaten;
-		backButton = new Rectangle (GamePanel.WIDTH/ 2 + 250, 430, 100, 45);
-		Graphics2D g2d = (Graphics2D) g;
 		
 		//game over text
 		g.setColor(Color.red);
@@ -262,12 +277,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.drawString("Highest Score: " + highScore, 
 				(SCREEN_WIDTH - metrics3.stringWidth("Highest Score " + highScore)) / 2, 
 				(SCREEN_HEIGHT / 2)+50);
-		
-		repaint();
-		Font fnt1 = new Font("arial", Font.BOLD, 25);
-		g.setFont(fnt1);
-		g.drawString("Back", backButton.x + 23, backButton.y + 30);
-		g2d.draw(backButton);
 	}
 	
 	/*Bingung bikin highscore
