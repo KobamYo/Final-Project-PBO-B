@@ -13,6 +13,7 @@ public class Level {
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
+		//membuat tulisan
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);
 		g.setColor(Color.white);
