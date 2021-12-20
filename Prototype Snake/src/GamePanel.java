@@ -293,7 +293,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setFont(fnt1);
 		g.drawString("Back", backButton.x + 23, backButton.y + 30);
 		g2d.draw(backButton);
-		applesEaten = 0;
 	}
 	
 	/*Bingung bikin highscore
