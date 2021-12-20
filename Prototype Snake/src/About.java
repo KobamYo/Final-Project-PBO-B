@@ -17,6 +17,7 @@ public class About {
 		g.setFont(new Font("Arial", Font.BOLD, 30));
 		g.drawString("ABOUT", 250, 100);
 		
+		// Content of About
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.drawString("Snake Game is a game", 200, 200);
