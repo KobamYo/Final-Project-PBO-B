@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public synchronized void startGame()
 	{
 		newApple();
+		newRottenApple();
 		running = true;
 		timer = new Timer(DELAY, this);
 		timer.start();
