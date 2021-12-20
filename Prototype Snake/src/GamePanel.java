@@ -51,13 +51,15 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	public void startGame()
-	{
+	{	
+		applesEaten = 0;
 		newApple();
 		newRottenApple();
 		//timer = new Timer(DELAY, this);
 		menu = new Menu();
 		about = new About();
 		level = new Level();
+		running = true;
 		this.time = 270;
         	this.timer = new Timer(this.time, this);
         	this.timer.start();
@@ -65,8 +67,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void paintComponent(Graphics g)
 	{
-			super.paintComponent(g);
-			draw(g);
+		super.paintComponent(g);
+		draw(g);
 	}
 	
 	public void game(Graphics g) {
@@ -131,31 +133,30 @@ public class GamePanel extends JPanel implements ActionListener {
 	{
 		if(State == STATE.GAME)
 		{
-			running = true;
 			level.render(g);
 		}
 		if(State == STATE.EASY)
 		{
 			this.timer.stop();
 			this.time = 270;
-	        this.timer = new Timer(this.time, this);
-	        this.timer.start();
+	        	this.timer = new Timer(this.time, this);
+	        	this.timer.start();
 			game(g);
 		}
 		if(State == STATE.MEDIUM)
 		{
 			this.timer.stop();
 			this.time = 270 / 2;
-	        this.timer = new Timer(this.time, this);
-	        this.timer.start();
+	        	this.timer = new Timer(this.time, this);
+	       		this.timer.start();
 			game(g);
 		}
 		if(State == STATE.HARD)
 		{
 			this.timer.stop();
 			this.time = 270 / 3;
-	        this.timer = new Timer(this.time, this);
-	        this.timer.start();
+	        	this.timer = new Timer(this.time, this);
+	        	this.timer.start();
 			game(g);
 		}
 		else if (State == STATE.MENU) 
